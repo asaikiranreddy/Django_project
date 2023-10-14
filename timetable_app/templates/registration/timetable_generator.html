@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anurag University Timetables</title>
+    
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Add custom CSS -->
+    <style>
+        
+        /* Your custom CSS styles */
+        body {
+           /*background-image: url('https://img.freepik.com/free-psd/foliage-decorated-frame_53876-91347.jpg?size=626&ext=jpg&uid=R120480187&ga=GA1.1.1394229053.1695912527&semt=ais');
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            animation: backgroundAnimation 10s infinite alternate; /* Add background animation */
+            position: relative; /* Required for watermark positioning */
+        }
+        
+        /* Watermark */
+        body::before {
+            content: 'Anurag University';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg); /* Adjust rotation angle as needed */
+            font-size: 50px; /* Adjust font size as needed */
+            color: rgba(255, 255, 255, 0.3); /* Adjust watermark color and opacity */
+            pointer-events: none; /* Prevent interaction with the watermark */
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .table-container {
+        overflow-x: auto; /* Enable horizontal scrolling on small screens */
+        }
+
+        .table {
+        border-radius: 10px; /* Add rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        overflow: hidden; /* Hide overflowing content */
+        animation: fadeInUp 1s ease-in-out; /* Apply animation to the table */
+        margin: 0; /* Remove default margin */
+        }
+
+        .table thead th {
+        background-color: #343a40; /* Change the background color of table headers */
+        color: #fff; /* Change the text color of table headers */
+        }
+
+        .table td,
+        .table th {
+            animation: fadeInUp 1s ease-in-out; /* Apply animation to table cells */
+            vertical-align: middle; /* Vertically center the content */
+            text-align: center; /* Center-align the content */
+            padding: 10px; /* Add padding to table cells */
+        }
+
+        @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Media query for screens smaller than 576px (small mobile devices) */
+    @media (max-width: 576px) {
+        .table {
+            font-size: 14px; /* Adjust font size for smaller screens */
+        }
+    }
+
+
+        .section-heading {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF5733;
+            margin-bottom: 20px; /* Add margin-bottom for gap */
+            display: block; /* Ensure subheadings are displayed */
+        }
+        .navbar {
+            background-color: #333; /* Change the background color */
+        }
+        .navbar-light .navbar-toggler-icon {
+            background-color: #fff; /* Change the color of the toggler icon */
+        }
+        .table thead th {
+            background-color: #343a40; /* Change the background color of table headers */
+            color: #fff; /* Change the text color of table headers */
+        }
+        .btn-print {
+            background-color: #17a2b8; /* Change the background color of the Print button */
+            color: #fff; /* Change the text color of the Print button */
+        }
+        a:hover {
+            color: #FF5733; /* Change the link color on hover */
+        }
+        .footer {
+            background-color: #333; /* Change the background color of the footer */
+            color: #fff; /* Change the text color of the footer */
+            padding: 15px 0; /* Add padding to the footer */
+        }
+        .footer a {
+            border-right: 1px solid #fff; /* Add a right border to separate links */
+            padding-right: 10px; /* Add padding to separate links */
+            margin-right: 10px; /* Add margin to separate links */
+        }
+        
+        .scroll-down-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 3s forwards;
+        }
+
+        .scroll-down-button .btn {
+            padding: 10px 20px;
+            background-color: #17a2b8; /* Change the background color of the button */
+            color: #fff; /* Change the text color of the button */
+        }
+        .table {
+            animation: fadeInUp 1s ease-in-out; /* Apply animation to entire table */
+        }
+
+        .table td,
+        .table th {
+            animation: fadeInUp 1s ease-in-out; /* Apply animation to table cells */
+            vertical-align: middle; /* Vertically center the content */
+            text-align: center; /* Center-align the content */
+            padding: 10px; /* Add padding to table cells */
+        }
+
+        .time-slot,
+        .subject {
+            animation: fadeInUp 1s ease-in-out; /* Apply animation to time slots and subjects */
+            font-size: 16px; /* Adjust font size */
+            background-color: #f2f2f2; /* Background color for table cells */
+            border: 1px solid #ddd; /* Border for table cells */
+            border-radius: 5px; /* Add rounded corners */
+        }
+        .main-heading {
+    background-color: #F48C06; /* Choose your desired background color */
+    color: #FFFFFF; /* Choose your desired text color */
+    padding: 20px; /* Add some padding for spacing */
+    font-size: 36px; /* Choose your desired font size */
+    text-align: center;
+    margin-top: 5rem; /* Adjust the top margin for spacing */
+}
+
+/* Make the heading responsive for smaller screens */
+@media screen and (max-width: 768px) {
+    .main-heading {
+        font-size: 28px; /* Adjust font size for smaller screens */
+    }
+}
+        .year-heading {
+            font-family: 'Your Custom Font', sans-serif; /* Replace 'Your Custom Font' with the actual font name or URL */
+            /* Add other font styles like font-size, font-weight, etc. if needed */
+        }
+        .teacher-email a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+
+.year-sem {
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; 
+
+    @media (max-width: $breakpoint-md) {
+        font-size: 16px; 
+    }
+
+    @media (max-width: $breakpoint-sm) {
+        font-size: 14px; 
+    }
+}
+
+.teacher-email a:hover {
+    color: #0056b3;
+}
+        /* Custom CSS for the scroll-down button */
+        .scroll-down-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000; /* Ensure it's above other content */
+            opacity: 0; /* Initially hidden */
+            animation: fadeIn 1s ease-in-out 3s forwards; /* Fade-in animation with delay */
+        }
+        .header {
+            text-align: center;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        table {
+        border-collapse: collapse;
+        width: 100%;
+        }
+        th, td {
+        border: 1px solid #333; /* Dark border color */
+        padding: 8px;
+        text-align: center;
+        }
+        th {
+        background-color: #343a40; /* Dark background color for header */
+        color: #fff; /* Text color for header */
+        }
+
+        body, h1, h2, h3, p, ul, ol, li {
+    margin: 0;
+    padding: 0;
+}
+
+        .header p {
+            margin: 0;
+            font-style: italic;
+        }
+
+        
+
+        @media (max-width: 768px) {
+            /* Adjust styles for smaller screens */
+            .header {
+                font-size: 14px;
+            }
+        }
+        input[type="file"] {
+    color: white;
+}
+
+        /* Style the button */
+        .scroll-down-button .btn {
+            padding: 10px 20px;
+        }
+        @media (max-width: 768px) {
+        .main-heading {
+            font-size: 28px; /* Adjust font size for smaller screens */
+        }
+        /* Add more responsive styles for smaller screens here */
+    }
+
+    /* Media query for screens smaller than 576px (small mobile devices) */
+    @media (max-width: 576px) {
+        .main-heading {
+            font-size: 24px; /* Further adjust font size for smaller screens */
+        }
+        /* Add more responsive styles for smaller screens here */
+    }
+
+
+    
+
+        /* Add responsive styles */
+        @media (max-width: 576px) {
+            /* Adjust the position for smaller screens */
+            .scroll-down-button {
+                bottom: 10px;
+                right: 10px;
+            }
+            /* Adjust the button size for smaller screens */
+            .scroll-down-button .btn {
+                padding: 5px 10px;
+                font-size: 14px;
+            }
+            
+        }
+        
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container"> <!-- Added a container to center content -->
+        <!-- Top-left corner content -->
+        <div class="d-flex">
+            <!-- Print Button -->
+            <button class="btn btn-light" onclick="printTimetables()">Print</button>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <select name="selected_email" id="classTeacherSelect">
+                <option value="" disabled selected>Please select a mail id to be sent</option>
+                <option value="anireddysaikiran2001@gmail.com">College Group Mail</option>
+                <option value="anireddysaikiran2001@gmail.com">Ist Year Group Mail</option>
+                <option value="anireddysaikiran2001@gmail.com">2nd Year Group Mail</option>
+                <option value="anireddysaikiran2001@gmail.com">3rd Year Group Mail</option>
+                <option value="anireddysaikiran2001@gmail.com">4th Year Group Mail</option>
+                <option value="manual">Enter Manual Email Address</option>
+                <!-- Add more options as needed -->
+            </select>
+            <input type="email" name="manual_email" id="manualEmailInput" placeholder="Enter Email Address" style="display: none;">
+            <input type="file" name="timetable_pdf" id="timetable_pdf">
+        <button type="button" onclick="sendTimetable()">Send</button>
+        </form>
+
+
+
+        <!-- Navbar Toggler (for small screens) -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Centered button -->
+        <div class="mx-auto">
+            <a class="btn btn-light" href="javascript:void(0);" onclick="refreshPage()">
+                <i class="fas fa-sync-alt"></i> Refresh The Time slots
+            </a>
+        </div>
+        <div id="botui-app"></div>
+</nav>
+
+<div class="container mt-4">
+    <!-- Add a margin-top class to the heading -->
+    <h1 class="text-center main-heading mt-5" style="margin-top: 5px;">Anurag University Generated Time Tables</h1>
+    <div class="header">
+        <p>(Formerly Anurag Group of Institutions)</p>
+        <p>School of Engineering</p>
+        <b><p>TIME TABLE - 2023-2024</p></b>
+    </div>
+    <div class="year-info">
+        <div class="info-left">
+            <p class="year-sem">YEAR & SEM: B.TECH IV YEAR / 1ST SEM</p>
+            <div class="info-right" style="text-align: right;">
+                <b><p class="room-number">Room No: 111</p></b>
+            </div>
+            <h5 class="bg-primary text-white p-2 year-heading">Branch & Section: CSE-H</h5>
+        </div>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Day/Time</th>
+                    <th>9:00 AM-9:55 AM</th>
+                    <th>9:55 AM-10:50 AM</th>
+                    <th>10:50 AM-11:45 AM</th>
+                    <th>11:45 AM-12:40 PM</th>
+                    <th>12:40 PM-1:20 PM</th>
+                    <th>1:20 PM-2:15 PM</th>
+                    <th>2:15 PM-3:10 PM</th>
+                    <th>3:10 PM-4:05 PM</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for day in timetable_data %}
+                    <tr>
+                        <td>{{ day.Day_Time }}</td>
+                        {% for subject in day.Subjects %}
+                            <td>
+                                {% if day.Day_Time == '12:40 PM-1:20 PM' %}
+                                    {% if forloop.first %}  {# Check if it's the first iteration to display 'Lunch Period' #}
+                                        Lunch Period
+                                    {% endif %}
+                                {% else %}
+                                    {{ subject }}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="group-mail-ids-wrapper mt-4 d-flex justify-content-center align-items-center">
+    <div class="group-mail-ids">
+        <p><strong>Group Mail ID of CSE-H:</strong> cseg2020-2024@anurag.edu.in</p>
+        <p><strong>Group Mail ID of All Sections:</strong> cse2020-2024@anurag.edu.in</p>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="table-container mt-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Hall Ticket Numbers</th>
+                    <th>Name of the Mentor</th>
+                    <th>Mail IDs</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- Sample Data, replace this with your actual data -->
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td>21EG505801-24</td>
+                        <td>Dr.A.Jyothi</td>
+                        <td>ajyothicse@anurag.edu.in</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>21EG505825-48</td>
+                        <td>Mrs.A.Durga Bhavani</td>
+                        <td>durgabhavanicse@anurag.edu.in</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>21EG505849-71</td>
+                        <td>Mentor 3</td>
+                        <td>mentor3@example.com</td>
+                    </tr>
+                </table>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+            <div class="additional-info mt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Class Incharge:</strong> Mrs. A. Durga Bhavani</p>
+                            <p><strong>Mail ID:</strong> durgabhavanicse@anurag.edu.in</p>
+                            <p><strong>Phone Number:</strong> 9191919191</p>
+                        </div>
+                        <div class="col-md-6 d-flex flex-column align-items-start align-items-md-end">
+                <p><strong>Coordinator:</strong> Dr. Pvs Siva Prasad</p>
+                <p><strong>Mail ID:</strong> pvssivaprasadcse@anurag.edu.in</p>
+            </div>
+
+        </div>
+        <div class="col-md-12 text-center mt-5">
+    <p style="font-style: italic;"><strong>Dean, CSE</strong> [Signature]</p>
+</div>
+            <div class="col-md-12 text-right">
+    <p style="font-style: italic;"><strong>Dean, School of Engineering:</strong> [Signature]</p>
+</div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+    <div class="col-md-12 text-center mt-5">
+        <p><strong>© Anurag University</strong></p>
+    </div>
+
+    <!-- Add Bootstrap JS scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/botui/build/botui.min.js"></script>
+
+    <script>
+        // Function to print timetables
+        function printTimetables() {
+            // Hide the Print button and Refresh button to avoid them being printed
+            var printButton = document.querySelector('button[onclick="printTimetables()"]');
+            var refreshButton = document.querySelector('a[onclick="refreshPage()"]');
+            printButton.style.display = 'none';
+            refreshButton.style.display = 'none';
+    
+            // Select the content to print by its id
+            var contentToPrint = document.getElementById('timetables-section');
+    
+            // Print the selected content
+            window.print();
+    
+            // Restore the Print button and Refresh button visibility after printing is done
+            printButton.style.display = 'block';
+            refreshButton.style.display = 'block';
+        }
+    
+        // Function to refresh the page
+        function refreshPage() {
+            location.reload();
+            window.scrollTo(0, 0); // Scrolls to the top of the page after reloading
+        }
+    </script>
+    <script>
+        document.getElementById('sendButton').addEventListener('click', function () {
+            // Get the selected email address from the dropdown list
+            const selectedEmail = document.getElementById('classTeacherSelect').value;
+    
+            // Check if a valid email address is selected
+            if (selectedEmail) {
+                // Send the timetable to the selected email (you can implement this functionality)
+                alert('Timetable sent to ' + selectedEmail);
+            } else {
+                alert('Please select a valid email address.');
+            }
+        });
+    </script>
+    <script>
+        // Function to send the PDF when the "Send" button is clicked
+        function sendTimetable() {
+            // Get the selected email address from the dropdown list
+            const selectedEmail = document.getElementById('classTeacherSelect').value;
+    
+            // Check if a valid email address is selected
+            if (!selectedEmail) {
+                alert('Please select a valid email address.');
+                return;
+            }
+    
+            // Get the selected PDF file
+            const pdfFile = document.getElementById('timetable_pdf').files[0];
+    
+            // Check if a PDF file is selected
+            if (!pdfFile) {
+                alert('Please select a PDF file to send.');
+                return;
+            }
+    
+            // Create a FormData object to send the selected PDF file and email
+            const formData = new FormData();
+            formData.append('selected_email', selectedEmail);
+            formData.append('timetable_pdf', pdfFile);
+    
+            // Make an AJAX request to send the PDF (replace with your actual sending code)
+            // For this example, we'll just display a success message.
+            alert('Timetable Sent');
+    
+            // Reset the form (optional)
+            document.getElementById('sendForm').reset();
+        }
+    </script>
+    <!-- Add TypeScript script tag -->
+    <script>
+        function updateRoomNumbers() {
+        // Iterate through each section's timetable
+        document.querySelectorAll('.table').forEach(function (table) {
+            const roomNumberCells = table.querySelectorAll('tbody td:nth-child(3)'); // Select the empty room number cells
+            const roomNumbers = []; // Add your generated room numbers here or fetch them from your data
+    
+            // Populate room numbers in the cells
+            roomNumberCells.forEach(function (cell, index) {
+                cell.textContent = roomNumbers[index]; // Assign room number to the cell
+            });
+        });
+    }
+    
+    // Call the updateRoomNumbers function when the page is loaded
+    window.addEventListener('load', function () {
+        updateRoomNumbers();
+    });
+        // Function to generate a random color
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    
+        // Change the heading's background color on page load
+        window.addEventListener('load', () => {
+            const heading = document.querySelector('.main-heading');
+            heading.style.backgroundColor = getRandomColor();
+        });
+    </script>
+    <script>
+        // Function to handle changes in the select element
+        document.getElementById('classTeacherSelect').addEventListener('change', function () {
+            const selectedValue = this.value;
+            const manualEmailInput = document.getElementById('manualEmailInput');
+    
+            // If the selected option is "manual," show the manual email input field, otherwise hide it
+            if (selectedValue === 'manual') {
+                manualEmailInput.style.display = 'block';
+            } else {
+                manualEmailInput.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

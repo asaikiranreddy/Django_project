@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-image: url('https://i.pinimg.com/736x/5f/68/24/5f682422c49e903e6ed1acd500050dd7.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 500px;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: #2580b3;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        p {
+            margin-top: 10px;
+            color: red;
+        }
+        
+        /* Responsive CSS */
+        @media only screen and (max-width: 768px) {
+            .container {
+                max-width: 90%;
+            }
+            
+            .logo img {
+                width: 80px;
+            }
+            
+            h2 {
+                font-size: 24px;
+            }
+        }
+        
+        @media only screen and (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://anurag.edu.in/wp-content/uploads/2020/02/logo-1.png" alt="Anurag University Logo">
+        </div>
+        <h2>Time Table Generator</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <label for="last_two_digits">Secret key:</label>
+            <input type="password" id="last_two_digits" name="last_two_digits" maxlength="2" required
+                oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 2);"><br>
+            
+            <button type="submit" id="loginButton">Login</button>
+            <p>{{ error_message }}</p>
+        </form>
+        
+        <!-- Add this file input initially hidden -->
+        <input type="file" id="excelFileInput" style="display:none;">
+        <button type="button" id="uploadExcelButton" style="display:none;">Upload Excel</button>
+        
+        <script>
+            document.getElementById('loginButton').addEventListener('click', function() {
+                // Show the file input and upload button when the login button is clicked
+                document.getElementById('excelFileInput').style.display = 'block';
+                document.getElementById('uploadExcelButton').style.display = 'block';
+            });
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# timetable_project/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('timetable_app.urls')),
+    path('accounts/', include('timetable_app.urls')),
+]

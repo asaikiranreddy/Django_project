@@ -1,0 +1,59 @@
+<!-- timetable_app/templates/registration/signup.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* Your existing styles here */
+    </style>
+    <script>
+        function checkPasswordStrength() {
+            var password = document.getElementById('id_password1').value;
+            var passwordStrengthInfo = document.getElementById('password-strength-info');
+
+            // Define your password criteria (e.g., minimum length, special characters)
+            var minLength = 8;
+            var hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            // Check password strength
+            if (password.length >= minLength && hasSpecialCharacter) {
+                passwordStrengthInfo.innerHTML = 'Password strength: Strong';
+            } else {
+                passwordStrengthInfo.innerHTML = 'Password must be at least 8 characters long and contain special characters.';
+            }
+        }
+
+        function showSuccessPopup() {
+            alert('Account created successfully!');
+            window.location.href = '{% url "login" %}';  // Redirect to the login page
+        }
+    </script>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form method="post" onsubmit="showSuccessPopup()">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Password:</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirm Password:</label>
+                {{ form.password2 }}
+            </div>
+            <div id="password-strength-info"></div>
+            <button type="button" onclick="checkPasswordStrength()">Check Password Strength</button>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>

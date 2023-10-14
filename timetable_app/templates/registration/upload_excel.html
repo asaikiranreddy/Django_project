@@ -1,0 +1,28 @@
+<!-- timetable_app/templates/registration/upload_excel.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Excel</title>
+    <!-- Add your CSS styling here if needed -->
+</head>
+<body>
+    <div>
+        <h2>Upload Excel File</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <label for="excel_file">Choose Excel File:</label>
+                <input type="file" name="excel_file" accept=".xlsx, .xls" required>
+            </div>
+            <div>
+                <button type="submit">Upload</button>
+            </div>
+        </form>
+    </div>
+    <!-- Add your JavaScript code here if needed -->
+</body>
+</html>
